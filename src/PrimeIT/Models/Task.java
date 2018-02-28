@@ -6,7 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import PrimeIT.Database.DBCommand;
+import Database.DBCommand;
 
 public class Task {
 
