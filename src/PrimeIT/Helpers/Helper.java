@@ -14,13 +14,14 @@ public class Helper {
 
 	public static JSONArray JSONEncode(ResultSet rs) throws JSONException, SQLException {
 		JSONArray jsonArray = new JSONArray();		
+        int total_cols = rs.getMetaData().getColumnCount();
 		while (rs.next()) {
-            int total_rows = rs.getMetaData().getColumnCount();    			
-			JSONObject obj = new JSONObject();
-			for (int i = 0; i < total_rows; i++) {
+        	for (int i = 0; i < total_cols; i++) {
+            	JSONObject obj = new JSONObject();
                 obj.put(rs.getMetaData().getColumnLabel(i + 1).toLowerCase(), rs.getObject(i + 1));
                 jsonArray.put(obj);
-            }    			
+            	obj = null;
+            }
 		}
 		return jsonArray;
 	}
