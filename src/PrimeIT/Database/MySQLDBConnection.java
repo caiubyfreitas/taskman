@@ -1,3 +1,15 @@
+/*
+* ****************************************************************************************************************************
+*
+* DATABASE ACCESS LAYER
+* Fev-2018
+* By Caiuby Freitas
+*
+* Implements connection handshake to a particular mySQL database and transaction control
+*
+* ****************************************************************************************************************************
+*/
+
 package PrimeIT.Database;
 
 import java.sql.Connection;
@@ -22,11 +34,18 @@ public class MySQLDBConnection {
     	this.password = "oPuXqpKDJyuEv4cn";
     	this.port = "3306";    	
     }
+    
+	@Override
+	public void finalize() throws SQLException{
+		this.instance.setAutoCommit(true);
+	}
+
 
 	public void open() throws SQLException{
         try {
 			this.url += this.hostName + ":" + this.port + "/" + this.dbName;
-			this.instance = DriverManager.getConnection(this.url, this.userName, this.password);		
+			this.instance = DriverManager.getConnection(this.url, this.userName, this.password);
+			this.instance.setAutoCommit(false);
         } 
 		catch (Exception e) {
             System.out.println("Database Connection Creation Failed : " + e.getMessage());
@@ -43,6 +62,14 @@ public class MySQLDBConnection {
 			}
 		}
 		this.instance = null;
+	}
+	
+	public void commitTransaction() throws SQLException {
+		this.instance.commit();
+	}
+	
+	public void rollbackTransaction() throws SQLException{
+		this.instance.rollback();
 	}
 	
 }

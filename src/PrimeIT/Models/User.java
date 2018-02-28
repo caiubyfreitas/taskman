@@ -6,7 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import PrimeIT.Database.DBCommand;
+import PrimeIT.Database.MySQLDBCommand;
 
 public class User {
 	
@@ -50,7 +50,7 @@ public class User {
 		
 		// Execute o SQL
     	try {
-    		DBCommand cmd = new DBCommand();
+    		MySQLDBCommand cmd = new MySQLDBCommand();
     		result = cmd.query(stmt, params);
     	}
 		catch(SQLException e) {
