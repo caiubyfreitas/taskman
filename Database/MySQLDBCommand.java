@@ -33,7 +33,8 @@ public class MySQLDBCommand extends DBCommand {
 	 * Execute a configurable query w/ parameters
 	 * Result is given in a JSONArray format to make data transfer to front-end easier via ajax 
 	 */
-	public JSONArray query(String stmt, JSONArray params) throws SQLException, JSONException {
+	@Override
+	public JSONArray query(String stmt, JSONArray params) throws JSONException, SQLException {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		JSONArray result = null;
@@ -64,6 +65,7 @@ public class MySQLDBCommand extends DBCommand {
 	 * Execute a configurable SQL command.
 	 * Returns the total number of records affected by the operation.
 	 */
+	@Override
 	public int execute(String stmt, JSONArray params) throws SQLException, JSONException{
 		int recordsAffected = 0;
 		PreparedStatement st = null;
