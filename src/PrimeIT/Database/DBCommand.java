@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import PrimeIT.Helpers.Helper;
 
@@ -20,13 +19,17 @@ public class DBCommand extends MySQLDBConnection{
 		this.close();
 	}
 	
-	public JSONArray query(String stmt) throws SQLException, JSONException {
+	public JSONArray query(String stmt, JSONArray params) throws SQLException, JSONException {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		JSONArray result = null;
 		try {
-			st = this.instance.prepareStatement(stmt);
-			rs = st.executeQuery(stmt);
+			st = this.instance.prepareStatement(stmt, ResultSet.CONCUR_READ_ONLY);
+			for (int i = 0, tot = params.length(); i < tot; i++) {
+				String fieldName = params.getJSONObject(i).keys().next().toString();
+				st.setObject((i+1), params.getJSONObject(i).get(fieldName));	
+			}
+			rs = st.executeQuery();
     		result = Helper.JSONEncode(rs);
 		} 
 		catch (SQLException e) {
@@ -49,7 +52,7 @@ public class DBCommand extends MySQLDBConnection{
 		try {
 			this.instance.setAutoCommit(false);
 			st = this.instance.prepareStatement(stmt);
-			for (int i=0; i<params.length(); i++) {
+			for (int i = 0, tot = params.length(); i < tot; i++) {
 				String fieldName = params.getJSONObject(i).keys().next().toString();
 				st.setObject((i+1), params.getJSONObject(i).get(fieldName));	
 			}
