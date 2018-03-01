@@ -10,7 +10,7 @@
 * ****************************************************************************************************************************
 */
 
-package PrimeIT.Database;
+package Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,10 +28,10 @@ public class MySQLDBConnection {
 
     public MySQLDBConnection() {
     	this.hostName = "localhost";
-    	this.dbName = "lab";
+    	this.dbName = "mydb";
     	this.url = "jdbc:mysql://";
-    	this.userName = "tester";
-    	this.password = "oPuXqpKDJyuEv4cn";
+    	this.userName = "root";
+    	this.password = "admin";
     	this.port = "3306";    	
     }
     
