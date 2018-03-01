@@ -10,7 +10,7 @@
 * ****************************************************************************************************************************
 */
 
-package PrimeIT.Database;
+package Database;
 
 import java.sql.SQLException;
 
@@ -19,7 +19,7 @@ import org.json.JSONException;
 
 public class DBCommand {
 	
-	public DBCommand() throws SQLException{
+	public DBCommand(){
 	}
 
 	@Override
@@ -27,12 +27,12 @@ public class DBCommand {
 		
 	}
 	
-	public JSONArray query(String stmt, JSONArray params) throws SQLException, JSONException{
-		return params;
+	public JSONArray query(String stmt, JSONArray params) throws JSONException, SQLException{
+		return null;
 	
 	}
 	
-	public int execute(String stmt, JSONArray params) throws SQLException, JSONException{
+	public int execute(String stmt, JSONArray params) throws JSONException, SQLException{
 		return 0;
 	}
 

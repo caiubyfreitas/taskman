@@ -8,7 +8,7 @@
 * ****************************************************************************************************************************
 */
 
-import PrimeIT.Controllers.UserController;
+import Controllers.UserController;
 
 public class Test {
 	

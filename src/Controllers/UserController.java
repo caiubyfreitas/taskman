@@ -11,31 +11,31 @@
 * ****************************************************************************************************************************
 */
 
-package PrimeIT.Controllers;
+package Controllers;
 
 import org.json.JSONException;
 
-import PrimeIT.Models.User;
+import Models.User;
 
 public class UserController {
 	
-	public void add(String nome, String email, String password) throws JSONException{
+	public void add(String nome, String username, String password) throws JSONException{
 		User us = new User();
-		us.setName(nome);
-		us.setEmail(email);
+		us.setHumanName(nome);
+		us.setUsername(username);
 		us.setPassword(password);
 		us.add();
 	}
 	
 	public void remove(int id) throws JSONException {
 		User us = new User();
-		us.setId(id);
+		us.setUser_ID(id);
 		us.remove();
 	}
 
-	public boolean authenticate(String email, String password) throws JSONException {
+	public boolean authenticate(String username, String password) throws JSONException {
 		User us = new User();
-		us.setEmail(email);
+		us.setUsername(username);
 		us.setPassword(password);
 		if (us.exists()) {
 			return true;
