@@ -1,11 +1,12 @@
 /*
 * ****************************************************************************************************************************
 *
-* DATABASE ACCESS LAYER
+* MODEL LAYER
 * Fev-2018
 * By Caiuby Freitas
 *
-* Implements USER data model.
+* Defines USER data model.
+* Only the basic database level check should be implemented here. No business rules, except to keep data integrity.
 *
 * ****************************************************************************************************************************
 */
@@ -34,7 +35,7 @@ public class User {
 		this.id = newValue;
 	}
 	
-	public int getID() {
+	public int getId() {
 		return this.id;
 	}	
 	
@@ -55,13 +56,65 @@ public class User {
 		this.password = newValue;
 	}
 	
+	public void setName(String newValue) {
+		this.name = newValue;
+		this.fullName = newValue;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public String getFullName() {
+		return this.fullName;
+	}
+	
 	// Insere registro
-	public void add() {
+	public void add() throws JSONException {
+
+		// Define o SQL associado ao método
+		String stmt = "INSERT INTO USER (ID, NAME, FULLNAME, EMAIL, PASSWORD, PICTURE) VALUES (NULL, ?, ?, ?, ?, 'TEMP')";
+
+		// Insere o(s) parâmetro(s) em uma matriz JSON 
+		JSONArray params = new JSONArray();
+		params.put(new JSONObject().put("name", this.getName()));
+		params.put(new JSONObject().put("fullname", this.getFullName()));
+		params.put(new JSONObject().put("email", this.getEmail()));
+		params.put(new JSONObject().put("password", this.getPassword()));
 		
+		// Executa o SQL
+    	try {
+    		MySQLDBCommand cmd = new MySQLDBCommand();
+    		cmd.execute(stmt, params);
+    	}
+		catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		finally {
+		}    	
+
 	}
 	
 	// Remove registro
-	public void remove() {
+	public void remove() throws JSONException {
+
+		// Define o SQL associado ao método
+		String stmt = "DELETE FROM USER WHERE ID = ?";
+
+		// Insere o(s) parâmetro(s) em uma matriz JSON 
+		JSONArray params = new JSONArray();
+		params.put(new JSONObject().put("id", this.getId()));
+		
+		// Executa o SQL
+    	try {
+    		MySQLDBCommand cmd = new MySQLDBCommand();
+    		cmd.execute(stmt, params);
+    	}
+		catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		finally {
+		}    	
 		
 	}
 	
@@ -104,7 +157,7 @@ public class User {
 
 		// Insere o(s) parâmetro(s) em uma matriz JSON 
 		JSONArray params = new JSONArray();
-		params.put(new JSONObject().put("id", this.getID()));
+		params.put(new JSONObject().put("id", this.getId()));
 		
 		// Execute o SQL
     	try {

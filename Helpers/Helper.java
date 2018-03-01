@@ -1,3 +1,17 @@
+/*
+* ****************************************************************************************************************************
+*
+* HELPER CLASS
+* Fev-2018
+* By Caiuby Freitas
+*
+* Implements general purpose static methods.
+* 
+* JSONEconde: converts a result set in a JSON typed matrix to help sending data back to the presentation layer
+*
+* ****************************************************************************************************************************
+*/
+
 package PrimeIT.Helpers;
 
 import java.sql.ResultSet;

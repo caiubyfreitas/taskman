@@ -1,3 +1,16 @@
+/*
+* ****************************************************************************************************************************
+*
+* CONTROLLER LAYER
+* Fev-2018
+* By Caiuby Freitas
+*
+* Defines a controller to interact with the USER data model.
+* All functionalities need in the presentation layer should be implemented here, specially business rules.
+*
+* ****************************************************************************************************************************
+*/
+
 package PrimeIT.Controllers;
 
 import org.json.JSONException;
