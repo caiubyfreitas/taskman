@@ -9,6 +9,8 @@ public class Test {
     		if (usuario.authenticate("anapaula@gmail.com", "es9L3jnw.obL.")) {
     			System.out.println("Passar para a view que pode prosseguir.");
     		};
+    		usuario.remove(31);
+    		usuario.add("fulaninho", "fulaninho@fulaninho.com", "advinha2");
 
     	}
     	catch(Exception e) {
